@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^3.2.10",
     "nodemon": "^2.0.19"
   }
 }
