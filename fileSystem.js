@@ -1,44 +1,32 @@
 const fs = require("fs");
 const path = require("path");
-// 1.새 폴더 만들기
+
+// 1.create new folder
 if (!fs.existsSync("fileSystemExample")) {
-  fs.mkdir("./fileSystemExample", (err) => {
-    if (err) throw err;
-    console.log("New directory created!");
-  });
+  fs.mkdirSync("./fileSystemExample");
 }
 
-// 2. 폴더 안에 새 파일 만들기
-fs.writeFile(
-  path.join(__dirname, "fileSystemExample", "greeting.txt"),
-  "Hello!",
-  (err) => {
-    if (err) throw err;
-    console.log("Write complete");
-  }
-);
+// Absolut path
+const databaseFile = path.join(__dirname, "fileSystemExample", "items.json");
+// Relative path
+// const databaseFile = path.join("fileSystemExample", "items.json")
 
-// 3. 존재하는 파일 안에 내용 추가하기
-fs.appendFile(
-  path.join(__dirname, "fileSystemExample", "greeting.txt"),
-  "\nMy name is Sooyeon",
-  (err) => {
-    if (err) throw err;
-    console.log("Append complete");
-  }
-);
+// 2. create new data in the file
+if (!fs.existsSync(databaseFile)) {
+  fs.writeFileSync(databaseFile, '{"items":[]}\n');
+}
 
-fs.appendFile(
-  path.join(__dirname, "fileSystemExample", "newFile.txt"),
-  "New file created!",
-  (err) => {
-    if (err) throw err;
-    console.log("Append complete");
-  }
-);
+// 3. load the file content in the memory
+databaseData = fs.readFileSync(databaseFile);
 
-// 4. 파일 삭제하기
-fs.unlink(path.join(__dirname, "fileSystemExample", "newFile.txt"), (err) => {
-  if (err) throw err;
-  console.log("file deleted!");
-});
+console.log(databaseData);
+
+database = JSON.parse(databaseData);
+
+console.log(database);
+
+// 4. change database in memory
+database.items.push({ name: "new item" });
+
+// 5. Write back to the file
+fs.writeFileSync(databaseFile, JSON.stringify(database));
