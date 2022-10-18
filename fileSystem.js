@@ -7,9 +7,10 @@ if (!fs.existsSync("fileSystemExample")) {
 }
 
 // Absolut path
-const databaseFile = path.join(__dirname, "fileSystemExample", "items.json");
+// const databaseFile = path.join(__dirname, "fileSystemExample", "items.json");
 // Relative path
-// const databaseFile = path.join("fileSystemExample", "items.json")
+const databaseFile = path.join("fileSystemExample", "items.json");
+console.log(databaseFile);
 
 // 2. create new data in the file
 if (!fs.existsSync(databaseFile)) {
@@ -19,14 +20,14 @@ if (!fs.existsSync(databaseFile)) {
 // 3. load the file content in the memory
 databaseData = fs.readFileSync(databaseFile);
 
-console.log(databaseData);
+// console.log(databaseData);
 
 database = JSON.parse(databaseData);
 
-console.log(database);
+// console.log(database);
 
 // 4. change database in memory
-database.items.push({ name: "new item" });
+database.items.push({ name: "egg" });
 
 // 5. Write back to the file
 fs.writeFileSync(databaseFile, JSON.stringify(database));
