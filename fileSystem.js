@@ -29,7 +29,9 @@ if (!fs.existsSync(databaseFileDir)) {
 
 // 3. 파일 업데이트 하기
 // 지정한 경로의 파일에서 데이터를 읽어옵니다.
-const databaseBuffer = fs.readFileSync(databaseFileDir);
+
+const databaseBuffer = fs.readFileSync(databaseFileDir, { encoding: "utf-8" });
+console.log(databaseBuffer);
 // 버퍼 형태로 로딩된 데이터를 자바스크립트 객체로 변환합니다.
 const parsedDatabase = JSON.parse(databaseBuffer);
 
